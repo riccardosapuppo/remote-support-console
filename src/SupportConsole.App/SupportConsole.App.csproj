@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    The only project here that needs Windows, and the only one that draws
+    anything. Everything it decides is decided in SupportConsole.Vision, which
+    builds and is tested on any machine — so the interesting half of this
+    repository is not behind a platform.
+
+    No documentation file on this one. The libraries have a public API that
+    somebody has to read; an application does not, and turning the check on
+    would mean writing XML comments for generated code-behind.
+  -->
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <RootNamespace>SupportConsole.App</RootNamespace>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SupportConsole.Frames\SupportConsole.Frames.csproj" />
+  </ItemGroup>
+
+</Project>
