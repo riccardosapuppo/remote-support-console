@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    The deciding, and nothing else.
+
+    net9.0 rather than net9.0-windows on purpose: there is not one Windows API
+    in this project, and there must not be. The whole argument is that the hard
+    part is a decision over a grid of numbers, and a decision over numbers can
+    be measured on any machine, in CI, without a screen. The Windows half lives
+    in SupportConsole and depends on this; nothing here depends on it.
+  -->
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+</Project>
