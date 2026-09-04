@@ -41,12 +41,19 @@ jobs:
         # The README shows the measurement in full. A block of output pasted
         # into prose is a block that was true once, so it is regenerated here
         # and compared. The program is the copy that counts.
+        #
+        # Carriage returns are dropped from both sides with tr and an octal
+        # escape. A working copy checked out on Windows would otherwise fail a
+        # check that is about content — and the sed spelling of the same thing
+        # is the one that keeps turning into a control character in this file.
         run: |
-          ./src/SupportConsole.Measure/bin/Release/net9.0/SupportConsole.Measure > now.txt
+          ./src/SupportConsole.Measure/bin/Release/net9.0/SupportConsole.Measure \
+            | tr -d '\015' > now.txt
 
           sed -n '/^## The measurement, in full/,$p' README.md \
             | sed -n '/^```$/,/^```$/p' \
-            | sed '1d;$d' > said.txt
+            | sed '1d;$d' \
+            | tr -d '\015' > said.txt
 
           # A comparison of two empty files passes. That is a check that
           # succeeds by finding nothing, so the emptiness is tested first.
