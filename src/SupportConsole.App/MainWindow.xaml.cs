@@ -20,7 +20,15 @@ using SupportConsole.Vision;
 /// </remarks>
 public partial class MainWindow : Window
 {
-    private readonly DispatcherTimer clock = new() { Interval = TimeSpan.FromMilliseconds(200) };
+    // Four times a second. Fast enough that a state change on the window next
+    // door looks immediate, slow enough that a capture and a downsample are
+    // never running against the render they are copying. A second divides by
+    // it exactly, and that is the part worth keeping: it lets the line the
+    // console shows be built out of this number instead of written beside it,
+    // and a sentence written beside a number outlives the number.
+    private const int ReadEveryMs = 250;
+
+    private readonly DispatcherTimer clock = new() { Interval = TimeSpan.FromMilliseconds(ReadEveryMs) };
 
     private PracticeMachine? practice;
 
@@ -95,7 +103,7 @@ public partial class MainWindow : Window
             return;
         }
 
-        Story.Text = "read from the window next to this one, four times a second.";
+        Story.Text = $"read from the window next to this one, {1000 / ReadEveryMs} times a second.";
 
         var frame = Capture.Of(practice.Screenful);
 

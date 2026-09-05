@@ -26,17 +26,24 @@ public static class Signals
     /// tell them apart.
     /// </para>
     /// <para>
-    /// Measured, the ranges lie on top of each other. A lock screen over the
-    /// stock Windows photograph reads about <b>11.8</b>; a desktop in use reads
-    /// about <b>10.7</b>; a lock screen on a dark background reads about
-    /// <b>4.1</b>. There is no threshold: the locked ones sit on both sides of
-    /// the unlocked one. What this measures is how detailed the wallpaper is.
+    /// Measured, the ranges lie on top of each other: a lock screen over the
+    /// stock photograph reads 18.6, one on a dark background reads 2.0, and a
+    /// desktop in use reads 15.1 to 43.1. There is no threshold: the locked
+    /// ones sit on both sides of the unlocked ones. What this measures is how
+    /// detailed the wallpaper is.
     /// </para>
     /// <para>
-    /// It is kept, computed, and reported — never used to decide. `npm`-style
-    /// measurement output prints it beside every frame so the claim can be
-    /// checked rather than believed, and a test asserts that no threshold over
-    /// this number classifies the corpus.
+    /// Those three figures are recomputed off the corpus by a check, which
+    /// fails if this paragraph, the one on <see cref="Detector"/>, or the
+    /// README stops agreeing with it. They are not to be edited by hand: the
+    /// figures that stood here before were true the day they were written, and
+    /// went on being quoted for a long time after they had stopped being.
+    /// </para>
+    /// <para>
+    /// It is kept, computed, and reported — never used to decide. The
+    /// measurement prints it beside every frame so the claim can be checked
+    /// rather than believed, and a test asserts that no threshold over this
+    /// number classifies the corpus.
     /// </para>
     /// </remarks>
     public static double EdgeEnergy(RemoteFrame frame)

@@ -16,11 +16,11 @@ namespace SupportConsole.Vision;
 ///
 /// <para>
 /// <b>Sharpness.</b> A working desktop is full of crisp text and a lock screen
-/// is a soft photograph, so detail ought to separate them. It does not: locked
-/// over the stock photograph reads 11.8, a desktop in use 10.7, locked on a
-/// dark background 4.1. The locked cases sit on both sides of the unlocked one
-/// and no threshold exists. It is still computed and still reported — see
-/// <see cref="Signals.EdgeEnergy"/> — and never used.
+/// is a soft photograph, so detail ought to separate them. It does not: a lock
+/// screen over the stock photograph reads 18.6, one on a dark background reads
+/// 2.0, and a desktop in use reads 15.1 to 43.1. The locked cases sit on both
+/// sides of the unlocked ones and no threshold exists. It is still computed and
+/// still reported — see <see cref="Signals.EdgeEnergy"/> — and never used.
 /// </para>
 ///
 /// <para>

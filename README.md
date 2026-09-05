@@ -57,7 +57,7 @@ dotnet --version        # 9.0.317 here; any 9.0.x will do
 ```
 
 ```
-dotnet test src/SupportConsole.Tests            # 53 checks
+dotnet test src/SupportConsole.Tests            # 58 checks
 dotnet run  --project src/SupportConsole.Measure    # the three claims
 dotnet run  --project src/SupportConsole.App        # the console (Windows)
 ```
@@ -77,7 +77,7 @@ decision nobody will ever measure.**
 | `SupportConsole.Vision` | The deciding. A frame, five signals, two rules, and the version of the rules that was wrong. No Windows anywhere in it. |
 | `SupportConsole.Frames` | Eleven drawn screens, and what each one really is. |
 | `SupportConsole.Measure` | Runs both rules over all eleven and prints the difference. Exits non-zero when a claim stops holding. |
-| `SupportConsole.Tests` | 53 checks, including one that asserts the first version still makes both of its mistakes. |
+| `SupportConsole.Tests` | 58 checks, including one that asserts the first version still makes both of its mistakes, and five that hold this page and the comments beside the code to the numbers the program computes. |
 | `SupportConsole.App` | The console and the practice machine. WPF, and the only part that needs Windows. |
 
 ### Why the corpus is drawn and not photographed
@@ -99,14 +99,19 @@ between a demonstration and a measurement.
 
 **Sharpness.** A working desktop is full of crisp text; a lock screen is a soft
 photograph. Detail ought to separate them. It does not. In the corpus, a lock
-screen over a photograph reads 18.6 and one on a dark background reads 2.0,
-while a desktop in use reads 15.1 to 43.1 — the locked frames sit on **both
+screen over the stock photograph reads 18.6, one on a dark background reads
+2.0, and a desktop in use reads 15.1 to 43.1 — the locked frames sit on **both
 sides** of the unlocked ones. The measurement tries every threshold the corpus
 can distinguish, in both directions, and the best one still reads three frames
 in ten wrong.
 
 The number is still computed, still printed beside every frame, and never used
 to decide anything. What it measures is how detailed the wallpaper is.
+
+Those three figures are not typed here from memory: a check recomputes them off
+the corpus and fails if this page, or either of the two comments beside the
+code, stops agreeing with it. They had drifted apart once already — this page
+right, the comments still quoting a corpus that had moved under them.
 
 **A uniform band under a straight edge.** The first taskbar test. On a dark
 theme over a dark wallpaper there is no edge to measure: the bar is the colour
