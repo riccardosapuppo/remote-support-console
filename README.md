@@ -313,4 +313,17 @@ the measurements — the numbers above come from this corpus, but the three
 mistakes they reproduce were made on real machines, and one of them typed a
 password at a session somebody was working in.
 
+## Production reconstruction
+
+This repository is an independent reconstruction of a production system I
+designed and developed.
+
+Confidentiality and intellectual property constraints mean the original cannot
+be published. It was rebuilt from scratch so it could be shown and run,
+preserving the core architecture, workflows and technical challenges of the
+production solution, with newly written code and fictional data.
+
+No proprietary source code, confidential data or client assets from the
+original system are included in this repository.
+
 MIT licensed. See [LICENSE](LICENSE).
