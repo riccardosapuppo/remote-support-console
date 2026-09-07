@@ -3,11 +3,10 @@
 Somebody in support opens a remote session on a machine in another building and
 needs to know one thing before doing anything else: **is anybody logged in?**
 
-Inside that session there is nothing to ask. No automation tree, no API, no
-window titles — the whole session is one bitmap being repainted a few times a
-second. So the question gets answered by looking at it, and the only honest way
-to do that is to say out loud what is being looked for, and what it costs to be
-wrong.
+Inside that session there is nothing to ask: no automation tree, no API, no
+window titles, only one bitmap being repainted a few times a second. So the
+question gets answered by looking at it, and the only honest way to do that is
+to say out loud what is being looked for, and what it costs to be wrong.
 
 **The two mistakes do not cost the same.** Deciding a locked machine is in use
 means doing nothing; somebody presses the button again. Deciding a machine
@@ -41,8 +40,8 @@ does damage; the decision in front of it is the part that was hard, the part
 that was wrong twice on real machines, and the only part worth showing. The
 console draws a crosshair where a password *would* go, and stops there.
 
-The screen it reads is a window belonging to the same application — a **practice
-machine** you can put into six states, including the two that broke the original.
+The screen it reads is a window of this same application, a **practice machine**
+you can put into six states, including the two that broke the original.
 Nothing here captures a desktop, enumerates windows, or reaches into another
 process.
 
@@ -100,7 +99,7 @@ between a demonstration and a measurement.
 **Sharpness.** A working desktop is full of crisp text; a lock screen is a soft
 photograph. Detail ought to separate them. It does not. In the corpus, a lock
 screen over the stock photograph reads 18.6, one on a dark background reads
-2.0, and a desktop in use reads 15.1 to 43.1 — the locked frames sit on **both
+2.0, and a desktop in use reads 15.1 to 43.1: the locked frames sit on **both
 sides** of the unlocked ones. The measurement tries every threshold the corpus
 can distinguish, in both directions, and the best one still reads three frames
 in ten wrong.
@@ -110,7 +109,7 @@ to decide anything. What it measures is how detailed the wallpaper is.
 
 Those three figures are not typed here from memory: a check recomputes them off
 the corpus and fails if this page, or either of the two comments beside the
-code, stops agreeing with it. They had drifted apart once already — this page
+code, stops agreeing with it. They had drifted apart once already: this page
 right, the comments still quoting a corpus that had moved under them.
 
 **A uniform band under a straight edge.** The first taskbar test. On a dark
@@ -124,8 +123,8 @@ with black above and below, so the search was happening inside the black.
 
 What survived is two things a taskbar has and a photograph does not, required
 together: a **step in mean brightness** between the bottom strip and the one
-above it, and **structure spread horizontally** — icons at one end, a clock at
-the other. The step is what carries the dark-on-dark case: the bar has no edge,
+above it, and **structure spread horizontally** (icons at one end, a clock at
+the other). The step is what carries the dark-on-dark case: the bar has no edge,
 but the icons lift the mean of the band by about twenty levels, and a mean does
 not need an edge.
 
@@ -133,8 +132,8 @@ not need an edge.
 
 ## The rule that was written, measured, and thrown away
 
-A wallpaper lit along the bottom passes both tests — a step where the light
-begins, detail spread the width of it — and reads as a taskbar. The obvious fix
+A wallpaper lit along the bottom passes both tests (a step where the light
+begins, detail spread the width of it) and reads as a taskbar. The obvious fix
 is that above a real taskbar the structure stops, and it works: it turns that
 frame from wrong to right.
 
@@ -189,7 +188,7 @@ It closes the gap the tests cannot. Drawn frames prove the deciding is right
 about drawings; this goes from a real window, rendered by the real graphics
 stack at the real size, through the real downsample, to the same answer. It
 found a bug the tests could not have: `RenderTargetBitmap` draws a visual
-*where it sits* — offset by wherever its parent put it — so capturing an element
+*where it sits* (offset by wherever its parent put it), so capturing an element
 forty pixels down a window left forty blank rows at the top and dropped forty
 from the bottom, which is where the taskbar is. The same mistake as the
 letterbox one, a floor down: something decided the bottom of the picture was
@@ -309,7 +308,7 @@ All three claims hold.
 This was rebuilt from a support tool written for an internal help desk, with
 everything identifying removed: no client, no machine names, no addresses, no
 screenshots of anybody's desktop. What is kept is the shape of the problem and
-the measurements — the numbers above come from this corpus, but the three
+the measurements: the numbers above come from this corpus, but the three
 mistakes they reproduce were made on real machines, and one of them typed a
 password at a session somebody was working in.
 
