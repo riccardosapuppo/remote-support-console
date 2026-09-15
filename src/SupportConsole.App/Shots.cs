@@ -44,13 +44,13 @@ public static class Shots
         machine.Show();
 
         console.ShowSource("in-use-dark-on-dark");
-        Write(console, Path.Combine(into, "console-in-use.png"));
+        Write(console, Path.Combine(into, "console-in-use.png"), TheConsole);
 
         console.ShowSource("locked-server-2012");
-        Write(console, Path.Combine(into, "console-locked.png"));
+        Write(console, Path.Combine(into, "console-locked.png"), TheConsole);
 
         machine.Pretend(PracticeMachine.Screens.InUseDark);
-        Write(machine, Path.Combine(into, "practice-machine.png"));
+        Write(machine, Path.Combine(into, "practice-machine.png"), TheMachine);
 
         console.Close();
         machine.Close();
@@ -58,14 +58,44 @@ public static class Shots
         return 0;
     }
 
-    private static void Write(Window window, string path)
+    /// <summary>The console's picture, at the size it is on this page.</summary>
+    /// <remarks>
+    /// Pinned here rather than taken from the window, and the reason is the
+    /// bug below.
+    /// </remarks>
+    private static readonly Size TheConsole = new(1114, 682);
+
+    /// <summary>The practice machine's picture, likewise.</summary>
+    private static readonly Size TheMachine = new(678, 501);
+
+    /// <summary>
+    /// Render one window's content at a size this file decides.
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// It used to render at <c>ActualWidth</c> -- what the window turned out to
+    /// be -- and a window turns out to be whatever the screen will allow. On a
+    /// desk the console came out 1114 by 682; on a build machine with a 1024 by
+    /// 768 display the same code drew 996 by 681, because a 1160-wide window
+    /// does not fit and Windows made it fit.
+    /// </para>
+    /// <para>
+    /// So the pictures in the README were pictures of somebody's monitor as
+    /// much as of this program, and no two people could produce the same file.
+    /// The layout is arranged to a size named here instead, which is the size
+    /// the page shows, and the result no longer depends on what is plugged in.
+    /// </para>
+    /// </remarks>
+    private static void Write(Window window, string path, Size at)
     {
         if (window.Content is not FrameworkElement inside) return;
 
-        window.UpdateLayout();
+        inside.Measure(at);
+        inside.Arrange(new Rect(at));
+        inside.UpdateLayout();
 
-        var wide = (int)Math.Round(inside.ActualWidth);
-        var tall = (int)Math.Round(inside.ActualHeight);
+        var wide = (int)Math.Round(at.Width);
+        var tall = (int)Math.Round(at.Height);
 
         var bitmap = new RenderTargetBitmap(wide, tall, 96, 96, PixelFormats.Pbgra32);
         var framed = new DrawingVisual();
