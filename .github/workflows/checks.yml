@@ -107,39 +107,50 @@ jobs:
         # of those can be met by opening the window and looking.
         run: dotnet run --project src/SupportConsole.App/SupportConsole.App.csproj -c Release --no-build --nologo -- --arrange
 
-      - name: the pictures in the README are pictures of this program
-        # They were identical to what the application produces, and identical by
-        # discipline: nothing compared them. A picture in a README is the first
-        # thing anybody reads and the last thing anybody re-takes, so it drifts
-        # from the program quietly and then argues with it. The application
-        # already draws them on a clean process, from named frames, the same
-        # bytes every time -- which is the only reason this comparison can be
-        # byte for byte rather than approximate.
+      - name: every picture the README shows is one this program still draws
+        # NOT byte for byte, and the first version of this step was -- which
+        # turned the build red for a reason that had nothing to do with the
+        # program.
+        #
+        # The shots are taken on a clean process from frames named in the
+        # source, so they are the same bytes every time ON ONE MACHINE. Across
+        # machines they are not: text rendering differs between this runner and
+        # the desk they were committed from, and a check cannot assert a
+        # property the thing does not have. What is worth holding is that the
+        # application still draws every picture this page shows, at the size it
+        # shows it -- which is what goes wrong when a window collapses, a frame
+        # is renamed, or a picture is left behind after the thing it showed was
+        # removed.
         run: |
           mkdir -p taken
           dotnet run --project src/SupportConsole.App/SupportConsole.App.csproj -c Release --no-build --nologo -- --shot taken
 
-          missing=0
+          # Width and height out of the PNG header: bytes 16 to 23, big-endian.
+          size () { od -An -tu4 -j16 -N8 --endian=big "$1" | tr -s ' ' | sed 's/^ //'; }
+
+          wrong=0
           for one in docs/*.png; do
             name=$(basename "$one")
+
             if [ ! -f "taken/$name" ]; then
-              echo "docs/$name is in the repository and the application does not draw it."
-              missing=1
+              echo "docs/$name is on the page and the application does not draw it."
+              wrong=1
               continue
             fi
-            if ! cmp -s "$one" "taken/$name"; then
-              echo "docs/$name is not what the application draws now."
-              missing=1
+
+            if [ "$(size "$one")" != "$(size "taken/$name")" ]; then
+              echo "docs/$name is $(size "$one") and the application now draws $(size "taken/$name")."
+              wrong=1
             fi
           done
 
-          if [ "$missing" -ne 0 ]; then
+          if [ "$wrong" -ne 0 ]; then
             echo ""
             echo "Re-take them: dotnet run --project src/SupportConsole.App -- --shot docs"
             exit 1
           fi
 
-          echo "All $(ls docs/*.png | wc -l) pictures are the ones this program draws."
+          echo "All $(ls docs/*.png | wc -l) pictures are drawn by this program, at the size the page shows them."
 
   # The check that the repository is the repository, rather than a working copy
   # somebody pushed.

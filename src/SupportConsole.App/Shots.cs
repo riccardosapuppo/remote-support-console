@@ -13,7 +13,15 @@ using System.Windows.Media.Imaging;
 /// is drawn rather than photographed: a screenshot taken by hand is a screenshot
 /// of whatever the window happened to be showing that afternoon, on a machine
 /// with whatever else was open behind it. This runs on a clean process, picks
-/// the frames by name, and writes files that are the same every time.
+/// the frames by name, and writes files that are the same every time <b>on one
+/// machine</b>.
+///
+/// Not across machines, and the distinction cost a red build. Text is rendered
+/// by the operating system, and a runner and a desk do not lay out a glyph the
+/// same way to the last byte, so a CI step comparing these byte for byte
+/// asserted a property they do not have. What holds everywhere is that the
+/// application still draws every picture the README shows, at the size it
+/// shows it, which is what CI compares now.
 /// </remarks>
 public static class Shots
 {

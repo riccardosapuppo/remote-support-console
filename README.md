@@ -128,9 +128,12 @@ a build machine is a decision nobody will ever measure.**
 
 The pictures on this page are drawn by the application itself —
 `dotnet run --project src/SupportConsole.App -- --shot docs` — on a clean
-process, from frames named in the source, the same bytes every time. CI takes
-them again and compares, so a picture cannot go on saying something the program
-has stopped doing.
+process, from frames named in the source. CI draws them again and checks that
+every one the page shows is still one this program produces, at the size it is
+shown at, so a picture cannot go on saying something the program has stopped
+doing. Not byte for byte: text is rendered by the operating system, and a
+runner and a desk do not place a glyph identically — a check cannot assert a
+property the thing does not have.
 
 ---
 
