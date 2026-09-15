@@ -28,7 +28,27 @@ non-zero if any of them stops being true. So does CI.
 
 ---
 
-## One command
+## One command, and it runs anywhere
+
+```
+dotnet run --project src/SupportConsole.Measure
+```
+
+Eleven drawn frames, and four columns: what each one really is, what the rule
+that ships says, what the first version said, and what the rule that was
+written and thrown away says. It is the whole argument on one screen, it needs
+no Windows, and it exits non-zero the day any of it stops being true. The table
+is at the foot of this page, printed by the program that computes it.
+
+Read the two rows that decide everything. `in-use-dark-on-dark` is a desktop
+somebody was working in that the first version called locked — that is the
+mistake that types a password at a stranger's session. `locked-bright-band` is
+a lock screen that the rule shipping here calls in use, which costs a click.
+Both rules read **10 of 11**; accuracy was never what chose between them.
+
+---
+
+## And one that shows it moving
 
 ```
 dotnet run --project src/SupportConsole.App
@@ -52,13 +72,13 @@ only decides which edge it hangs off.
 
 ![The console reading a dark taskbar on a dark wallpaper](docs/console-in-use.png)
 
-Windows only, and that is the one line here that is. Everything that decides
-anything lives in `SupportConsole.Vision`, which targets plain `net9.0` and is
-measured and tested on Linux in CI — so the two commands below run anywhere:
+Windows only, and it is the one thing here that is. Everything that decides
+anything lives in `SupportConsole.Vision`, which targets plain `net9.0`,
+references no WPF and no Win32, and is measured and tested on Linux in CI — so
+the command above and the checks below run anywhere:
 
 ```
 dotnet test src/SupportConsole.Tests            # 58 checks
-dotnet run  --project src/SupportConsole.Measure    # the three claims
 ```
 
 ---
