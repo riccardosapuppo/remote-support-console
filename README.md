@@ -34,12 +34,21 @@ non-zero if any of them stops being true. So does CI.
 dotnet run --project src/SupportConsole.App
 ```
 
-The console opens, already reading the first frame of the corpus and saying
-what it decided and why. The button at the bottom left opens the **practice
-machine**: a second window you can put into six states, including the two that
-broke the original, read live four times a second from the window next to it.
+**Two windows open, side by side.** On the left the console; on the right the
+**practice machine**, a window you can put into six states — including the two
+that broke the original. The console reads it four times a second and says what
+it decided and why, so changing the state on one side changes the answer on the
+other while you watch.
 
-Nothing else is needed and nothing else is started. It builds on the way in.
+The eleven drawn frames of the corpus are in the list down the left of the
+console, and the button under it brings the practice machine back if you close
+it. Nothing else is needed and nothing else is started; it builds on the way in.
+
+The pair is placed by arithmetic rather than left where the window manager puts
+them, because two windows stacked on each other are two windows somebody has to
+arrange before the point of this is visible. On a screen too short for the
+console it is cut to fit rather than moved — moving a window that does not fit
+only decides which edge it hangs off.
 
 ![The console reading a dark taskbar on a dark wallpaper](docs/console-in-use.png)
 
@@ -210,7 +219,17 @@ dotnet run --project src/SupportConsole.App -- --check report.txt
 ```
 
 runs all six without a person, and exits non-zero if any of them reads as
-something other than what it was told to be. CI runs that on Windows.
+something other than what it was told to be. CI runs that on Windows, along
+with
+
+```
+dotnet run --project src/SupportConsole.App -- --arrange
+```
+
+which puts the two windows on six screens — a 1366 laptop, a monitor to the
+left of the main one, a taskbar down the side — and says whether each placement
+is usable. It found the console hanging off the bottom of a small laptop the
+day it was written.
 
 It closes the gap the tests cannot. Drawn frames prove the deciding is right
 about drawings; this goes from a real window, rendered by the real graphics

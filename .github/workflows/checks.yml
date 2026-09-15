@@ -99,6 +99,14 @@ jobs:
           cat report.txt
           exit $code
 
+      - name: both windows land somewhere usable, on screens nobody here owns
+        # The application opens a pair and places them by arithmetic, and
+        # arithmetic can be wrong on a screen the author does not have: a
+        # laptop too short for the console, a second monitor to the left where
+        # the work area starts at a negative x, a taskbar down the side. None
+        # of those can be met by opening the window and looking.
+        run: dotnet run --project src/SupportConsole.App/SupportConsole.App.csproj -c Release --no-build --nologo -- --arrange
+
       - name: the pictures in the README are pictures of this program
         # They were identical to what the application produces, and identical by
         # discipline: nothing compared them. A picture in a README is the first

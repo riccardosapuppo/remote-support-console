@@ -79,18 +79,57 @@ public partial class MainWindow : Window
         Read(source.Drawn.Frame);
     }
 
-    private void OpenPracticeMachine(object sender, RoutedEventArgs e)
+    /// <summary>
+    /// Open the practice machine beside this window and start reading it.
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// Called when the application starts, and again by the button. It used to
+    /// be only the button: the console opened showing a drawn frame from the
+    /// corpus, which is a real thing to look at but a still one, and the live
+    /// half -- the window you put into six states and watch the decision change
+    /// on -- was behind a press somebody had to think of making.
+    /// </para>
+    /// <para>
+    /// The two windows are the demonstration and they are placed as a pair. See
+    /// <see cref="SideBySide"/>: it is arithmetic and not a window, so it can be
+    /// asked whether it works on a screen nobody here has.
+    /// </para>
+    /// </remarks>
+    public void OpenThePracticeMachine()
     {
         if (practice is null)
         {
             practice = new PracticeMachine { Owner = this };
             practice.Closed += (_, _) => practice = null;
+
+            var (mine, theirs) = SideBySide.On(
+                SystemParameters.WorkArea,
+                new Size(Width, Height),
+                new Size(practice.Width, practice.Height));
+
+            // Size as well as position: on a screen too short for it, a
+            // console that is only moved is a console with its bottom row of
+            // readings off the edge.
+            Width = mine.Width;
+            Height = mine.Height;
+            Left = mine.Left;
+            Top = mine.Top;
+
+            practice.Left = theirs.Left;
+            practice.Top = theirs.Top;
+
             practice.Show();
         }
 
         practice.Activate();
+
+        // The live source, which is index nought. Reading a window that has
+        // just opened is the thing worth seeing first.
         Sources.SelectedIndex = 0;
     }
+
+    private void OpenPracticeMachine(object sender, RoutedEventArgs e) => OpenThePracticeMachine();
 
     private void ReadPracticeMachine()
     {

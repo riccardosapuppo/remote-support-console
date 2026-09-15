@@ -67,7 +67,25 @@ public partial class App : Application
             return;
         }
 
-        new MainWindow().Show();
+        if (Array.IndexOf(e.Args, "--arrange") >= 0)
+        {
+            Shutdown(Arranging.Check());
+            return;
+        }
+
+        /*
+         * Both windows, because both windows are the demonstration.
+         *
+         * Here rather than in the console's constructor, and that distinction
+         * earns its keep: `--shot` builds a console and a practice machine of
+         * its own, off-screen, and would otherwise get a third window it never
+         * asked for. What opens a pair is running the application, not making
+         * a window.
+         */
+        var console = new MainWindow();
+
+        console.Show();
+        console.OpenThePracticeMachine();
     }
 
     private static int CheckTheWholeLoop(string report)
