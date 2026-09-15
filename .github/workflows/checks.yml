@@ -99,6 +99,40 @@ jobs:
           cat report.txt
           exit $code
 
+      - name: the pictures in the README are pictures of this program
+        # They were identical to what the application produces, and identical by
+        # discipline: nothing compared them. A picture in a README is the first
+        # thing anybody reads and the last thing anybody re-takes, so it drifts
+        # from the program quietly and then argues with it. The application
+        # already draws them on a clean process, from named frames, the same
+        # bytes every time -- which is the only reason this comparison can be
+        # byte for byte rather than approximate.
+        run: |
+          mkdir -p taken
+          dotnet run --project src/SupportConsole.App/SupportConsole.App.csproj -c Release --no-build --nologo -- --shot taken
+
+          missing=0
+          for one in docs/*.png; do
+            name=$(basename "$one")
+            if [ ! -f "taken/$name" ]; then
+              echo "docs/$name is in the repository and the application does not draw it."
+              missing=1
+              continue
+            fi
+            if ! cmp -s "$one" "taken/$name"; then
+              echo "docs/$name is not what the application draws now."
+              missing=1
+            fi
+          done
+
+          if [ "$missing" -ne 0 ]; then
+            echo ""
+            echo "Re-take them: dotnet run --project src/SupportConsole.App -- --shot docs"
+            exit 1
+          fi
+
+          echo "All $(ls docs/*.png | wc -l) pictures are the ones this program draws."
+
   # The check that the repository is the repository, rather than a working copy
   # somebody pushed.
   the-repository:

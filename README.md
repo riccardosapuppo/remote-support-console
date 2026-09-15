@@ -26,7 +26,31 @@ It comes with three claims, and each of them can fail:
 `dotnet run --project src/SupportConsole.Measure` prints those and exits
 non-zero if any of them stops being true. So does CI.
 
+---
+
+## One command
+
+```
+dotnet run --project src/SupportConsole.App
+```
+
+The console opens, already reading the first frame of the corpus and saying
+what it decided and why. The button at the bottom left opens the **practice
+machine**: a second window you can put into six states, including the two that
+broke the original, read live four times a second from the window next to it.
+
+Nothing else is needed and nothing else is started. It builds on the way in.
+
 ![The console reading a dark taskbar on a dark wallpaper](docs/console-in-use.png)
+
+Windows only, and that is the one line here that is. Everything that decides
+anything lives in `SupportConsole.Vision`, which targets plain `net9.0` and is
+measured and tested on Linux in CI — so the two commands below run anywhere:
+
+```
+dotnet test src/SupportConsole.Tests            # 58 checks
+dotnet run  --project src/SupportConsole.Measure    # the three claims
+```
 
 ---
 
@@ -61,11 +85,15 @@ dotnet run  --project src/SupportConsole.Measure    # the three claims
 dotnet run  --project src/SupportConsole.App        # the console (Windows)
 ```
 
-The last of those is the only line that needs Windows. Everything that decides
-anything is in `SupportConsole.Vision`, which targets plain `net9.0`, references
-no WPF and no Win32, and is measured and tested on Linux in CI. That is not
-tidiness for its own sake: **a decision you cannot run on a build machine is a
-decision nobody will ever measure.**
+Only the last needs Windows. `SupportConsole.Vision` references no WPF and no
+Win32, and that is not tidiness for its own sake: **a decision you cannot run on
+a build machine is a decision nobody will ever measure.**
+
+The pictures on this page are drawn by the application itself —
+`dotnet run --project src/SupportConsole.App -- --shot docs` — on a clean
+process, from frames named in the source, the same bytes every time. CI takes
+them again and compares, so a picture cannot go on saying something the program
+has stopped doing.
 
 ---
 
