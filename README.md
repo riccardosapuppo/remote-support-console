@@ -70,7 +70,15 @@ arrange before the point of this is visible. On a screen too short for the
 console it is cut to fit rather than moved — moving a window that does not fit
 only decides which edge it hangs off.
 
-![The console reading a dark taskbar on a dark wallpaper](docs/console-in-use.png)
+![The console on a dark taskbar over a dark wallpaper: the verdict reads InUse, and in the corner THE FIRST VERSION SAID reads Locked, no straight edge at the bottom of the frame](docs/console-in-use.png)
+
+**That picture is the whole repository.** The verdict is `InUse`; in the corner,
+under **THE FIRST VERSION SAID**, is `Locked — no straight edge at the bottom of
+the frame`. Same frame, same pixels, two answers — and the one on the right is
+the answer that sends Ctrl+Alt+Del at somebody's session. Beside it,
+**DETAIL ON SCREEN** shows the sharpness reading greyed out and labelled
+*measured, and not used to decide*: the belief that was tried, disproved, and
+left on screen rather than deleted.
 
 Windows only, and it is the one thing here that is. Everything that decides
 anything lives in `SupportConsole.Vision`, which targets plain `net9.0`,
@@ -222,13 +230,13 @@ screen. It finds the **user photograph**, which is bigger: 20 cells by 21,
 against the box's 34 by 4. A text field is much wider than it is tall, and that
 one constraint is the whole of the difference.
 
-![The console on a Server 2012 sign-in screen](docs/console-locked.png)
+![The console on a Server 2012 sign-in screen: the box sits at 39% of the height under a user photograph larger than it, and the crosshair is on the box rather than on the face](docs/console-locked.png)
 
 ---
 
 ## The practice machine
 
-![The practice machine, dark theme on a dark wallpaper](docs/practice-machine.png)
+![The practice machine pretending to be a desktop in a dark theme over a dark wallpaper: the state the first detector read as locked](docs/practice-machine.png)
 
 A window that pretends to be a machine somebody is supporting, in the six states
 the corpus covers. The console reads it four times a second, through the same
